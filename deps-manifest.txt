@@ -1,0 +1,16 @@
+# 依赖清单（preflight.mjs 按此执行：核心层自动安装，按需/深度层检测+提示，装前确认）
+# 格式：层级 | 名称 | 检测命令 | 安装命令(mac) | 安装命令(linux) | 安装命令(win) | 说明
+# 口径注记：核心层仅 Node/playwright/浏览器内核可判 fail（阻塞）；git 等其余核心项 ok/warn 均不阻塞，仅提示。
+核心 | Node.js ≥20(复刻后端建议24+) | node -v | 官网/pkg 安装 | nvm/apt | 官网安装器 | 全部脚本的运行时
+核心 | git | git --version | brew install git | apt install git | 官网安装器 | 版本对照与交付管理（core 层 warn 不阻塞）
+核心 | playwright（库） | tools/node_modules/playwright | preflight 自动: npm i --prefix tools playwright@1.49.1 | 同 | 同 | 浏览器 RPA 库（内含 playwright-core）
+核心 | 浏览器内核 | 系统 Chrome → Edge → playwright chromium | 有系统 Chrome 用之；否则 npx playwright install chromium | 同 | 同 | 三档兜底，preflight 写 tools/browser.json
+按需 | rea-agents CLI | rea-agents --version | npm i -g rea-agents（或 npx 免安装） | 同 | 同 | JS 静态分析（endpoint/storage/模块图）；缺失自动回落 grep 正则
+按需 | tshark / capinfos | tshark -v | brew install --cask wireshark | apt install tshark | 官网安装器 | 抓包文件深度分析（pcap/HAR 之外的场景）
+按需 | mitmdump | mitmdump --version | brew install mitmproxy | apt install mitmproxy | 官网安装器 | mitmproxy 格式抓包文件解析
+深度 | apktool + JDK | apktool --version / java --version | brew install apktool openjdk@17 | apt install apktool default-jdk | 官网 | Android 目标（动态逆向+静态解包两轨共用）；体积大，装前列确认
+深度 | Frida | frida --version | pip install frida-tools | 同 | 同 | 动态逆向·运行时插桩（仅深度逆向目标）
+深度 | GDB / Rizin | gdb --version / rizin -v | brew install gdb rizin | apt install gdb rizin | 官网 | 动态逆向·调试器（断点观测函数调用）
+深度 | LLDB | lldb --version | 随 Xcode | apt install lldb | 官网 | 动态逆向·macOS 原生函数调用观测（REA observe_native_calls）
+深度 | binwalk / unblob | binwalk --help / unblob --help | brew install binwalk | apt install binwalk | WSL | 静态逆向·固件分析
+平台注意 | prlimit 类 | util-linux 套件 | — | apt install util-linux | 不支持 | 部分 REA 抓包分析在 Linux 才可用，降级登记

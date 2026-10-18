@@ -1,0 +1,11 @@
+# 运行产物（preflight/validate 生成，不入库）
+tools/
+tests/validate-output/
+preflight-report.json
+
+# 环境与凭据
+.env
+.env.*
+
+# 系统文件
+.DS_Store

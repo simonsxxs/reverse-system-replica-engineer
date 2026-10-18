@@ -1,0 +1,19 @@
+body { font: 14px/1.6 "Microsoft YaHei", system-ui, sans-serif; margin: 0; background: #f4f3f9; color: #333; }
+.card { background: #fff; border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 420px; box-shadow: 0 8px 30px rgba(30,20,80,.12); }
+h1 { font-size: 18px; margin: 0 0 12px; color: #6d5dfc; }
+label { display: block; font-size: 12px; color: #888; margin: 10px 0 4px; }
+input { width: 100%; box-sizing: border-box; padding: 9px 12px; border: 1.5px solid #e2e0ef; border-radius: 8px; font-size: 14px; }
+.btn { background: #6d5dfc; color: #fff; border: 0; border-radius: 8px; padding: 10px 16px; font-size: 14px; cursor: pointer; }
+.nav { display: flex; gap: 6px; padding: 12px 20px; background: #fff; border-bottom: 1px solid #eee; }
+.tab { border: 0; background: transparent; padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; color: #666; }
+.tab.active { background: #efeaff; color: #6d5dfc; font-weight: bold; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 18px; }
+.stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.stat { background: #fff; border-radius: 10px; padding: 14px 18px; flex: 1; min-width: 120px; }
+.stat b { display: block; font-size: 22px; color: #6d5dfc; }
+.stat span { font-size: 12px; color: #999; }
+.pane { background: #fff; border-radius: 10px; padding: 16px; }
+.pane[hidden] { display: none; }
+.modal { position: fixed; inset: 0; background: rgba(20,15,50,.45); display: flex; align-items: center; justify-content: center; }
+.modal[hidden] { display: none; }
+.modal .box { background: #fff; border-radius: 12px; padding: 22px; width: 320px; }
