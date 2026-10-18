@@ -1,8 +1,8 @@
-# 逆向系统复刻工程师 · 系统 1:1 复刻（system-1to1-replica）
+# 逆向系统复刻工程师 · 系统 1:1 复刻（reverse-system-replica-engineer）
 
 > 一套对任何目标系统做 1:1 复刻的完整方法论 + 可执行工具链，覆盖 Web 站点（MPA/SPA/管理后台）与 Electron 桌面软件；桌面原生 / 移动 App 提供工具矩阵与方法论指导。
 > 沉淀自一个 22 小时、11 建造批次、284 条终验断言全部通过的完整复刻项目。版本 1.2.2。
-> v1.2 采集证据加固：采集自动脱敏（含 DOM/内联脚本/请求响应）、独立快照 + 完成度状态机、相似度零配对护栏、validate 升级为 37 断言；Skill 显示名更名「逆向系统复刻工程师」（仓库名不变）。变更详情见 [`UPGRADE-v1.2.md`](UPGRADE-v1.2.md)。
+> v1.2 采集证据加固：采集自动脱敏（含 DOM/内联脚本/请求响应）、独立快照 + 完成度状态机、相似度零配对护栏、validate 升级为 37 断言；Skill 显示名更名「逆向系统复刻工程师」，仓库与目录随后更名 reverse-system-replica-engineer。变更详情见 [`UPGRADE-v1.2.md`](UPGRADE-v1.2.md)。
 
 ## 这是什么
 
@@ -65,10 +65,10 @@ skill 母本只需一份，可同步到任意机器的 Agent 发现路径：
 ```bash
 # macOS / Linux（排除运行产物 tools/ 与 tests/validate-output/）
 rsync -a --exclude tools --exclude tests/validate-output --exclude preflight-report.json \
-  <本仓库检出目录>/ ~/.agents/skills/system-1to1-replica/
+  <本仓库检出目录>/ ~/.agents/skills/reverse-system-replica-engineer/
 
 # Windows（PowerShell/cmd；退出码 <8 即成功）
-robocopy "<本仓库检出目录>" "%USERPROFILE%\.agents\skills\system-1to1-replica" /E /XD tools validate-output /XF preflight-report.json
+robocopy "<本仓库检出目录>" "%USERPROFILE%.agentsskillseverse-system-replica-engineer" /E /XD tools validate-output /XF preflight-report.json
 ```
 
 新电脑上的完整就绪流程：拷贝目录 → `node scripts/preflight.mjs`（自动装依赖）→ `node scripts/validate.mjs`（端到端自检）→ 开工。
@@ -90,8 +90,8 @@ robocopy "<本仓库检出目录>" "%USERPROFILE%\.agents\skills\system-1to1-rep
 ## 链接指引
 
 - **本仓库（完整版）**：
-  - GitHub：<https://github.com/simonsxxs/system-1to1-replica>
-  - Gitee 镜像：<https://gitee.com/simonsxx/system-1to1-replica>
+  - GitHub：<https://github.com/simonsxxs/reverse-system-replica-engineer>
+  - Gitee 镜像：<https://gitee.com/simonsxx/reverse-system-replica-engineer>
 - **SkillHub 科普版**：《系统对标复刻方法论与质量手册》——面向纯知识阅读的姊妹版，只讲方法论与质量闭环，不含操作工具链；上架审核通过后可技能搜索 `system-replica-playbook` 获取（链接待补）。
 
 > 完整版（本仓库）包含可执行工具链；科普版适合先了解方法论再决定是否上工具。
@@ -100,7 +100,7 @@ robocopy "<本仓库检出目录>" "%USERPROFILE%\.agents\skills\system-1to1-rep
 
 [MIT](LICENSE)
 
-<!-- signature-block:v2.4（本段由 system-1to1-replica/scripts/add-signature.mjs 管理，勿手改） -->
+<!-- signature-block:v2.4（本段由 reverse-system-replica-engineer/scripts/add-signature.mjs 管理，勿手改） -->
 
 ---
 

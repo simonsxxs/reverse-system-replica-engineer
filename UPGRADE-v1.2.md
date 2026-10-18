@@ -68,7 +68,7 @@
 - Skill 显示名：「系统 1:1 复刻」→「**逆向系统复刻工程师**」；
 - SKILL.md：H1 改「逆向系统复刻工程师 · 通用方法论与工具链」；frontmatter description 开头补人设定位句；正文无其他旧称谓（全库扫描确认）；
 - reference/01-07：标题与正文核查无旧称谓，无需改动；
-- **保持不变**（外链稳定）：目录名 `system-1to1-replica`、GitHub/Gitee 仓库名、发现副本路径、deps-manifest 与脚本内路径常量、frontmatter `name` 字段。
+- **保持不变**（外链稳定）：目录名 `system-1to1-replica`、GitHub/Gitee 仓库名、发现副本路径、deps-manifest 与脚本内路径常量、frontmatter `name` 字段。（v1.2.2 后调整：仓库与目录已更名 `reverse-system-replica-engineer`，上述各项随之变更，显示名「逆向系统复刻工程师」不变。）
 
 ## 四、母本→发现副本同步
 

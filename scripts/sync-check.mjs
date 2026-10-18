@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* sync-check.mjs — 母本 ↔ 发现副本 源文件一致性校验（sha256 清单比对）
  * 用法：node sync-check.mjs [副本路径]
- *   带副本路径：直接比对；不带：自动探测（cwd 及其各级父目录的 .agents/skills/system-1to1-replica，或 ~/.agents/skills/...）。
+ *   带副本路径：直接比对；不带：自动探测（cwd 及其各级父目录的 .agents/skills/reverse-system-replica-engineer，或 ~/.agents/skills/...）。
  * 比对范围：全部源文件；排除运行产物 tools/、tests/validate-output/、preflight-report.json、.git、node_modules、.DS_Store。
  * 输出：一致 / 差异清单（副本缺失、副本多出、内容不一致逐条列出）；exit 0=一致 1=有差异 2=找不到副本。
  * 口径提醒：母本是唯一编辑点——副本侧「多出」的文件多半是未誊回母本的新教训或陈旧残留，先合并回母本再同步。
@@ -39,13 +39,13 @@ function findCopy() {
   if (arg) { const p = path.resolve(arg); return fs.existsSync(p) ? p : null; }
   let dir = process.cwd();
   for (let i = 0; i < 8; i++) {
-    const cand = path.join(dir, '.agents', 'skills', 'system-1to1-replica');
+    const cand = path.join(dir, '.agents', 'skills', 'reverse-system-replica-engineer');
     if (fs.existsSync(cand) && path.resolve(cand) !== SKILL) return cand;
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
   }
-  const home = path.join(process.env.HOME || '', '.agents', 'skills', 'system-1to1-replica');
+  const home = path.join(process.env.HOME || '', '.agents', 'skills', 'reverse-system-replica-engineer');
   if (fs.existsSync(home) && path.resolve(home) !== SKILL) return home;
   return null;
 }

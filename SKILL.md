@@ -1,5 +1,5 @@
 ---
-name: system-1to1-replica
+name: reverse-system-replica-engineer
 description: 本技能将 Agent 定位为『逆向系统复刻工程师』——以动态/静态双轨逆向取证为唯一事实源，对目标系统做证据驱动的 1:1 复刻。对任何目标系统做 1:1 复刻的完整方法论——覆盖 Web 站点（MPA/SPA/管理后台）、桌面软件（含 Electron）、移动 App。当用户要求"复刻/克隆/仿站/照着做一个/还原/移植"某个系统/网站/软件、"做一个和 XX 一样的系统"、"对标复刻"、"逆向并重建"、"1:1 复刻 UI 和功能"时使用——即使没说"复刻"两个字，只要意图是照着现有系统重建一份可运行的副本，就应使用本技能。三大交付支柱缺一不可：RPA 驱动逆向取证、UI 交互页面 1:1、功能交互逻辑真实可运行；配套分批建造、独立审查、返工闭环、全站逐按钮总盘点与终验归档的完整质量体系。
 ---
 
@@ -7,7 +7,7 @@ description: 本技能将 Agent 定位为『逆向系统复刻工程师』——
 
 > 版本 1.2.2 ｜ 教训清单可持续追加（回流规则见 reference/06：母本是唯一编辑点）｜ 变更记录见 UPGRADE-v1.1.md 与 UPGRADE-v1.2.md
 > v1.1 深度支持范围：Web 站点（MPA/SPA/管理后台）与 Electron；桌面原生/移动 App 提供工具矩阵与方法论指导，任务书变体与实证判例待 v1.2 回流。
-> v1.2 采集证据加固：capture-page 自动脱敏（含 dom.html 文本节点+内联脚本）+ 独立快照 + 完成度状态机（capture-status.json）+ 请求失败留证；similarity 零配对护栏 + 无配对阻断 + 覆盖率 + --map 改名映射；validate 升级为 37 断言（含捆绑采集器闭环自检与假阳性消除）。Skill 显示名更名「逆向系统复刻工程师」（目录名 system-1to1-replica 与外部路径保持不变）。
+> v1.2 采集证据加固：capture-page 自动脱敏（含 dom.html 文本节点+内联脚本）+ 独立快照 + 完成度状态机（capture-status.json）+ 请求失败留证；similarity 零配对护栏 + 无配对阻断 + 覆盖率 + --map 改名映射；validate 升级为 37 断言（含捆绑采集器闭环自检与假阳性消除）。Skill 显示名更名「逆向系统复刻工程师」（目录与仓库现已更名 reverse-system-replica-engineer）。
 > 验证状态：preflight/validate 已实测（v1.2.1：37 断言全过 + 破坏性验证）；沉淀自一个 22 小时、11 建造批次、284 终验断言全过的完整复刻项目。
 
 ## 三支柱（交付定义，缺一不算复刻完成）
@@ -100,7 +100,7 @@ node <skill目录>/scripts/validate.mjs   # 对内置演练靶场跑迷你复刻
 
 ## 安装与同步（跨机使用）
 
-- 本 skill 母本在 `05_skills/system-1to1-replica/`（**唯一编辑点**）；要让 ZCode 触发，需有一份在发现路径（`<项目>/.agents/skills/system-1to1-replica/` 或 `~/.agents/skills/`）。
+- 本 skill 母本在 `05_skills/reverse-system-replica-engineer/`（**唯一编辑点**）；要让 ZCode 触发，需有一份在发现路径（`<项目>/.agents/skills/reverse-system-replica-engineer/` 或 `~/.agents/skills/`）。
 - 同步命令（母本 → 发现路径，排除运行产物）：
   - macOS/Linux：`rsync -a --exclude tools --exclude tests/validate-output --exclude preflight-report.json <母本>/ <发现路径>/`
   - Windows（PowerShell/cmd）：`robocopy "<母本>" "<发现路径>" /E /XD tools validate-output /XF preflight-report.json`（退出码 <8 即成功）

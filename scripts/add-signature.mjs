@@ -50,7 +50,7 @@ function loadConfig() {
 /* ── README 署名段 ── */
 function readmeBlock(cfg) {
   return [
-    `<!-- ${README_MARKER}（本段由 system-1to1-replica/scripts/add-signature.mjs 管理，勿手改） -->`,
+    `<!-- ${README_MARKER}（本段由 reverse-system-replica-engineer/scripts/add-signature.mjs 管理，勿手改） -->`,
     '',
     '---',
     '',
