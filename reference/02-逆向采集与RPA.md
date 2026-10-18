@@ -11,7 +11,15 @@
 - 动态证明「实际行为」，静态证明「能力边界」——两轨各自有盲区：
   - 只做动态：写操作/隐藏路由因只读红线**永远抓不到**（实证：静态分析从代码挖出 6 个从未触发的写操作接口，含源码行号）；
   - 只做静态：运行时动态拼接的 URL、真实响应数据**拿不到**（实证：老式框架动态拼 URL，静态清单不全，靠动态抓包补齐）；
-- 最终接口清单每条标注来源：**动态实测 / 静态推断 / 双轨互证**；复刻后端按清单全量实现。
+- **证据来源标签（五值枚举，每条证据必须带其一）**：
+  | 标签 | 含义 | 证据形态 |
+  | --- | --- | --- |
+  | 动态实测 | RPA 运行目标系统真实观测到的行为 | 抓包 JSON/截图/点击日志（capture-status 完整） |
+  | 静态推断 | 代码/包体级证据，未经运行观测 | 源码行号/包体分析产物 |
+  | 双轨互证 | 动静两轨证据同指一条 | 两轨证据引用成对登记 |
+  | 模拟实现 | 实测不到的写操作按推断契约实现 | 前端消费面反推 + 登记进「待真实环境验证清单」 |
+  | 演示数据 | 演示开关解锁态产出（env 开关置 1） | 解锁态=推断依据（引登记项）+ 模拟验证结果（引自测套件）；**默认态才引原站抓包证据**——两态证据等级不同，逐态标注，不得互冒 |
+- 复刻后端按清单全量实现；模拟实现与演示数据两条同时登记「待真实环境验证清单」，不得冒充实测。
 
 ## 一、动态轨 · 五件套标准（Web 基准，跨平台泛化见 §二）
 
@@ -27,7 +35,12 @@
 
 写操作红线：确认类到确认态即取消；消耗/外发类默认不触发（授权分级见 07）。
 
-落地工具：`node <skill>/scripts/capture-page.mjs <URL> <输出目录> [--user/--pass/--submit + CAPTURE_USER/CAPTURE_PASS]` 一键产出单页五件套骨架（full.png/dom.html/api 每请求一 JSON/state 占位/notes 骨架），交互状态按 notes 清单人工补拍。
+落地工具：`node <skill>/scripts/capture-page.mjs <URL> <输出目录基名> [--user/--pass/--submit + CAPTURE_USER/CAPTURE_PASS] [--out 精确目录] [--force]` 一键产出单页五件套骨架 + 完成度状态（full.png/dom.html/api 每请求一 JSON/state 占位/notes 骨架/capture-status.json），交互状态按 notes 清单人工补拍。工具行为（v1.2 起）：
+
+- **独立快照**：默认输出 `<目录基名>-<YYYYMMDD-HHmmss>`，重跑永不覆盖历史证据；`--out` 显式指定但目录已存在非空 → exit 2 拒绝（确要写入加 `--force`）；
+- **写盘前自动脱敏**：api/*.json 的请求体/响应体/URL 查询串/错误信息、敏感响应头（set-token/cookie/authorization 等）自动打码为 `***REDACTED***`（模式表：password/pass/api key/token/secret/authorization/Bearer/手机号/邮箱）；只替换字符串值内部，产物保持 JSON 可解析——自动脱敏不免除人工复核义务（§四-8）；
+- **异步等待**：networkidle 超时后继续等在途 XHR 至完成或上限（15s），full.png/dom.html 落盘时点记录 lastResponseAt；
+- **完成度状态机**：capture-status.json 写 `complete / skeleton / partial / failed` 四态 + 依据清单——state 占位与 notes TODO 未补 → **至多 skeleton**（不算完成）；存在非 2xx/3xx 响应或在途 XHR 超限 → partial；页面打不开/落盘失败 → failed。退出码 0=complete、3=skeleton/partial、1=failed、2=用法错误。**人工补齐 state 与 notes 后，该页才可按 complete 归档**；消费方读到 status 文件损坏/缺失时保守视为 skeleton。
 
 ## 二、目标类型识别与 RPA 适配矩阵（动静双轨工具选型）
 

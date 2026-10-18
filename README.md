@@ -1,7 +1,8 @@
-# 系统 1:1 复刻（system-1to1-replica）
+# 逆向系统复刻工程师 · 系统 1:1 复刻（system-1to1-replica）
 
 > 一套对任何目标系统做 1:1 复刻的完整方法论 + 可执行工具链，覆盖 Web 站点（MPA/SPA/管理后台）与 Electron 桌面软件；桌面原生 / 移动 App 提供工具矩阵与方法论指导。
-> 沉淀自一个 22 小时、11 建造批次、284 条终验断言全部通过的完整复刻项目。版本 1.1.0。
+> 沉淀自一个 22 小时、11 建造批次、284 条终验断言全部通过的完整复刻项目。版本 1.2.2。
+> v1.2 采集证据加固：采集自动脱敏（含 DOM/内联脚本/请求响应）、独立快照 + 完成度状态机、相似度零配对护栏、validate 升级为 37 断言；Skill 显示名更名「逆向系统复刻工程师」（仓库名不变）。变更详情见 [`UPGRADE-v1.2.md`](UPGRADE-v1.2.md)。
 
 ## 这是什么
 
@@ -51,9 +52,9 @@ node scripts/validate.mjs
 
 ## 演示靶场说明
 
-`tests/fixture-site/` 是一个**自建的纯前端演示站**（登录页 + 工作台 + 弹窗 + 接口），仅作为端到端自检的靶场：
+`tests/fixture-site/` 是一个**自建的演示站**（登录页 + 工作台 + 弹窗 + 演示 API），仅作为端到端自检的靶场：
 
-- `validate.mjs` 对它执行「采集 → 建造 → 审查」迷你闭环，断言覆盖采集五件套抽样、复刻产物白标与重写合规（similarity <40%）、视觉冒烟、tab 行为、署名组件风格自适应、非豁免 4xx=5xx=0、0 pageerror；
+- `validate.mjs` 对它执行「采集 → 建造 → 审查」迷你闭环（37 断言），覆盖采集五件套抽样与自动脱敏、复刻产物白标与重写合规（similarity <40%）、视觉冒烟、tab 行为、署名组件风格自适应、非豁免 4xx=5xx=0、0 pageerror；
 - 靶场与任何真实目标系统无关，不含真实域名、账号或数据；
 - 运行产物（截图 / 复刻副本 / 报告）落在 `tests/validate-output/`，不入版本库（见 `.gitignore`）。
 
@@ -78,10 +79,12 @@ robocopy "<本仓库检出目录>" "%USERPROFILE%\.agents\skills\system-1to1-rep
 ```
 ├── SKILL.md              # 技能入口：三支柱 / 六阶段 / 硬性红线 / 质量指标 / 执行模式
 ├── reference/            # 8 篇参考：阶段流程、逆向采集与 RPA、建造规范、审查闭环、任务书模板、教训清单、合规安全、署名组件
-├── scripts/              # 工具链：preflight（环境自检+装依赖）/ scaffold（骨架）/ validate（端到端自检）/ similarity（相似度审查）/ capture-page（采集）/ sync-check（跨机一致性）/ add-signature（署名组件注入）
+├── scripts/              # 工具链：preflight（环境自检+装依赖）/ scaffold（骨架）/ validate（端到端自检 37 断言）/ similarity（相似度审查+零配对护栏）/ capture-page（采集+自动脱敏+独立快照+完成度状态机）/ sync-check（跨机一致性）/ add-signature（署名组件注入）
 ├── assets/               # 署名组件素材（signature.json + 微信群二维码）
-├── tests/fixture-site/   # 内置演示靶场（自建演示站，供 validate 使用）
-└── UPGRADE-v1.1.md       # v1.1 变更记录
+├── tests/fixture-site/   # 内置演示靶场（自建演示站 + 演示 API，供 validate 使用）
+├── openspec/             # 变更记录（OpenSpec：proposal / tasks / review）
+├── UPGRADE-v1.1.md       # v1.1 变更记录
+└── UPGRADE-v1.2.md       # v1.2 变更记录（采集证据加固 + 更名）
 ```
 
 ## 链接指引
