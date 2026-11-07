@@ -108,5 +108,6 @@ robocopy "<本仓库检出目录>" "%USERPROFILE%.agentsskillseverse-system-rep
 
 - **作者**：simon，一个不懂代码的AI极客
 - **微信交流群**：simonsxxs
+- **个人网站**：<https://simonsxx.com>
 - **GitHub**：<https://github.com/simonsxxs>
 - **Gitee**：<https://gitee.com/simonsxx>
